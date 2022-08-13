@@ -47,6 +47,14 @@
   justify-content: space-around;
 }
 
-.cards-side {
- 
+.cards-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(209, 209, 209);
 }

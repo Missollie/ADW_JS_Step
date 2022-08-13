@@ -1,15 +1,11 @@
-// const btnAuth = document.getElementById("btnAuth");
-// const modalWrapper = document.getElementById("modalWrapper");
-// const btnSubmitLogIn = document.getElementById("btnSubmitLogIn");
-// const authError = document.getElementById('authError');
-// const btnCreateCard = document.getElementById('btnCreateCard');
-// const main = document.getElementById('main');
-
-let cardsList = [];
 class API {
   constructor() {
-    this._token = "483740eb-f28b-4d9d-967b-7141fa43f968";
+    this.token;
     this._baseUrl = "https://ajax.test-danit.com/api/v2/";
+  }
+
+  setToken(token) {
+    this.token = token;
   }
 
   async request(method, url, body) {
@@ -17,7 +13,7 @@ class API {
       method,
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${this._token}`,
+        Authorization: this.token ? `Bearer ${this.token}` : undefined,
       },
       body: body ? JSON.stringify(body) : undefined,
     });
@@ -42,30 +38,84 @@ class API {
   }
 }
 
-class Authorization extends API {
-  async login(body) {
-    const response = await super.post("cards/login", body);
+class Authorization {
+  constructor(api) {
+    this.api = api;
+  }
 
-    return await response.text();
+  async login(body) {
+    const response = await this.api.post("cards/login", body);
+    const token = await response.text();
+    this.api.setToken(token);
+
+    return token;
+  }
+}
+
+class Cards {
+  constructor(api) {
+    this.api = api;
+    this.cardsList = [];
+  }
+
+  async getCards() {
+    const response = await this.api.get("cards");
+    const data = await response.json();
+    this.cardsList = data;
+    this.render()
+    return data;
+  }
+
+  // async postCards() {
+  //   return await this.api.post("cards", {
+  //     title: "test test1",
+  //     fio: "petro petrov",
+  //     fullName: 'petro petrov',
+  //     firtsName: 'pertov',
+  //     lastName: 'petrov',
+  //     description: "Плановый визит",
+  //     doctor: "Therapist",
+  //     bp: "24",
+  //     age: 23,
+  //     weight: 70,
+  //   });
+  // }
+
+  render() {
+    const cards = [];
+    this.cardsList.forEach((card) => {
+      const cardItem = document.createElement("div");
+      cardItem.classList.add('card')
+      cardItem.innerHTML = `
+        <div>${card.fullName}</div>
+        <div>${card.doctor}</div>
+        <button>show more</button>
+        <button>change info</button>
+        <button>delete cart</button>
+      `;
+      
+      document.getElementById("cardsWrapper").appendChild(cardItem)
+    });
+
   }
 }
 
 class Modal {
-  constructor() {
+  constructor(modalName) {
+    this.modalName = modalName;
     this.root = document.body;
   }
 
-  handleClickCloseModal(e) {
+  handleClickCloseModal = (e) => {
     e.preventDefault();
     document.getElementById("modalWrapper").classList.add("hidden-element");
-    if (
-      document.getElementById("btnAuth").classList.contains("hidden-element")
-    ) {
+
+    if (this.modalName === "Authorization") {
       document.getElementById("btnAuth").classList.remove("hidden-element");
     }
-  }
+  };
 
-  renderModal(childContext) {
+  render(childContext) {
     const modalWrapper = document.createElement("div");
     modalWrapper.setAttribute("id", "modalWrapper");
     modalWrapper.classList.add("hidden-element", "modal-wrapper");
@@ -80,7 +130,13 @@ class Modal {
   }
 }
 class ModalAuthorization extends Modal {
-  renderModalAuthorization() {
+  constructor(modalName) {
+    super(modalName);
+    this.modalName = modalName;
+    this.root = document.body;
+  }
+
+  render() {
     const modalAuthorization = document.createElement("form");
     modalAuthorization.classList.add("modal");
     modalAuthorization.setAttribute("id", "authModal");
@@ -90,23 +146,14 @@ class ModalAuthorization extends Modal {
       <button id="btnSubmitLogIn">submit</button>
       <div id="authError" class="error hidden-element">Incorrect username or password</div>
     `;
-    super.renderModal(modalAuthorization);
+    super.render(modalAuthorization);
   }
 }
 
-class Cards extends API {
-  async getCards() {
-    const response = await super.get('cards');
-
-    return await response;
-  }
-}
-
-const cards = new Cards();
-// console.log(cards.getCards());
-
-const modal = new ModalAuthorization();
-modal.renderModalAuthorization();
+const api = new API();
+const cards = new Cards(api);
+const auth = new Authorization(api);
+new ModalAuthorization("Authorization").render();
 
 const btnAuth = document.getElementById("btnAuth");
 const modalWrapper = document.getElementById("modalWrapper");
@@ -118,12 +165,9 @@ const main = document.getElementById("main");
 btnAuth.addEventListener("click", handleClickShowAuthModal);
 btnSubmitLogIn.addEventListener("click", handleClickLogIn);
 
-const auth = new Authorization();
-
 function handleClickShowAuthModal() {
   btnAuth.classList.add("hidden-element");
   modalWrapper.classList.remove("hidden-element");
-  // modal.renderModalAuthorization()
 }
 
 async function handleClickLogIn(e) {
@@ -134,10 +178,8 @@ async function handleClickLogIn(e) {
     btnAuth.classList.add("hidden-element");
     btnCreateCard.classList.remove("hidden-element");
     main.classList.remove("hidden-element");
-    cardsList = (await cards.getCards()).json()
-    console.log(cardsList);
+    await cards.getCards();
   } catch (error) {
     authError.classList.remove("hidden-element");
-    console.error(error);
   }
 }
