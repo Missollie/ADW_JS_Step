@@ -13,16 +13,34 @@
       <div>LOGO</div>
       <div>
         <button id="btnAuth">log in</button>
-        <div id="authModal" class="hidden-element">
-          <input id='authEmail' type='email' placeholder="enter email"/>
-          <input id='authPassword' type='password' placeholder="enter password"/>
+        <!-- <form id="authModal" class="hidden-element">
+          <input required id='authEmail' type='email' placeholder="enter email"/>
+          <input required id='authPassword' type='password' placeholder="enter password"/>
           <button id="btnSubmitLogIn">submit</button>
           <div id="authError" class="error hidden-element">Incorrect username or password</div>
-        </div>
+        </form> -->
         <button id="btnCreateCard" class="hidden-element">Create card</button>
       </div>
     </div>
   </header>
+  <main id="main" class="hidden-element main ">
+    <form class="filtes-side">
+      <div>
+        <div>filter 1</div>
+        <input placeholder="input 1"/>
+      </div>
+      <div>
+        <div>filter 2</div>
+        <input placeholder="input 2"/>
+      </div>
+      <div>
+        <div>filter 3</div>
+        <input placeholder="input 3"/>
+      </div>
+      <button>search</button>
+    </form>
+    <div class="cards-side"></div>
+  </main>
 </body>
 <script src="./script/index.js"></script>
 </html>
