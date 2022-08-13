@@ -5,8 +5,24 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <link rel="stylesheet" href="./styles/style.css">
 </head>
 <body>
-  <script src="./script/index.js"></script>
+  <header class="container">
+    <div class="header">
+      <div>LOGO</div>
+      <div>
+        <button id="btnAuth">log in</button>
+        <div id="authModal" class="hidden-element">
+          <input id='authEmail' type='email' placeholder="enter email"/>
+          <input id='authPassword' type='password' placeholder="enter password"/>
+          <button id="btnSubmitLogIn">submit</button>
+          <div id="authError" class="error hidden-element">Incorrect username or password</div>
+        </div>
+        <button id="btnCreateCard" class="hidden-element">Create card</button>
+      </div>
+    </div>
+  </header>
 </body>
+<script src="./script/index.js"></script>
 </html>
