@@ -5,7 +5,7 @@ class API {
   }
 
   setToken(token) {
-    this.token = token;
+    this.token = token;btnAuth
   }
 
   async request(method, url, body) {
@@ -119,7 +119,7 @@ class Modal {
     const modalWrapper = document.createElement("div");
     modalWrapper.setAttribute("id", "modalWrapper");
     modalWrapper.classList.add("hidden-element", "modal-wrapper");
-    modalWrapper.textContent = "Modal modal";
+    modalWrapper.textContent = "Login";
     const closeBtnModal = document.createElement("button");
     closeBtnModal.innerHTML = "close";
     const modalContext = childContext;
@@ -141,11 +141,24 @@ class ModalAuthorization extends Modal {
     modalAuthorization.classList.add("modal");
     modalAuthorization.setAttribute("id", "authModal");
     modalAuthorization.innerHTML = `
-      <input required id='authEmail' type='email' placeholder="enter email"/>
-      <input required id='authPassword' type='password' placeholder="enter password"/>
-      <button id="btnSubmitLogIn">submit</button>
+    <div class="center">
+    <h1>Login</h1>
+ 
+      <div class="txt_field"> 
+      <input required id='authEmail' type='email'  placeholder=""> 
+      <label>Username</label> </input>
+      </div> 
+      <div class="txt_field"> <input required id='authPassword' type='password' placeholder=""/> 
+      <label>Password</label></div>   
+      <div class="pass">Forgot Password?</div> 
+
+     <input id="btnSubmitLogIn" type="submit" value="Login" ></input>
+
       <div id="authError" class="error hidden-element">Incorrect username or password</div>
-    `;
+      <div class="signup_link">
+      Not a member? <a href="#">Signup</a>
+    
+    </div>`;
     super.render(modalAuthorization);
   }
 }
