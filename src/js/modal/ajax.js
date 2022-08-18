@@ -9,7 +9,7 @@
 //Authorization: Bearer ${3dfb076c-2ac8-4619-96f7-d8bc6f59b84b}
 import {token} from "./ModalLogIN.js";
 
-export const API = 'https://ajax.test-danit.com/api/v2/cards';
+export const API = 'https://ajax.test-danit.com/api/cards';
 
 
 export function getLogin(email, password) {
