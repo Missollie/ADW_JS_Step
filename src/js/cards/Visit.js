@@ -1,7 +1,7 @@
 import ModalForm from "../modal/ModalForm.js";
 import {deleteCard} from "../modal/ajax.js";
 
-//Створення основого классу карточок /Creating the main card class
+//Erstellung der Hauptklasse von Karten / Створення основного классу карточок /Creating the main card class
 export class Visit {
     constructor(visit) {
         this.id = visit.id;
@@ -24,7 +24,7 @@ export class Visit {
         };
     }
 
-    //Відображення карточок на основній сторінці / Displaying cards on the main page
+    //Anzeigen von Bildern auf der Hauptseite / Відображення карточок на основній сторінці / Displaying cards on the main page
     render(parent) {
         this.elem.fullName.textContent = this.fullName;
         this.elem.doctor.textContent = `Doctor: ${this.doctor}`;
@@ -51,7 +51,7 @@ export class Visit {
         this.elem.self.draggable = true;
         this.elem.self.dataset.id = this.id;
 
-        //Кнопка редагування карточок/ Card edit button
+        //Bildbearbeitungstaste / Кнопка редагування карточок/ Card edit button
         this.elem.editBtn.addEventListener("click", async (event) => {
             const form = new ModalForm();
             event.target.value = event.target.childNodes[0].outerText;
@@ -62,7 +62,7 @@ export class Visit {
             document.querySelectorAll(".form__select")[1].remove()
         });
 
-        //Кнопка видалення карточки / Card delete button
+        //Schaltfläche zum Löschen der Karte / Кнопка видалення карточки / Card delete button
         this.elem.deleteBtn.addEventListener("click", async (event) => {
             
             const response = await deleteCard(this.id);
@@ -83,14 +83,14 @@ export class Visit {
     }
 }
 
-//Дочерний класс Дантист | Child class Dentist
+//Kinderklasse Zahnarzt / Дочерний класс Дантист | Child class Dentist
 export class VisitDentist extends Visit {
     constructor(visit) {
         super(visit);
         this.lastDateVisit = visit.content.lastDateVisit;
     }
 
-//Отрисовка Дантиста на главной странице | Dentist drawing on the main page
+//Zeichnung eines Zahnarztes auf der Hauptseite / Відображення Дантиста на головній сторінці | Dentist drawing on the main page
     render(parent) {
         super.render(parent);
         this.elem.lastDateVisit = document.createElement("span");
@@ -113,7 +113,7 @@ export class VisitDentist extends Visit {
         }
     }
 
-//Кнопка для відображення додаткової інформації дантиста | Button for drawing additional information Dentist
+//Schaltfläche zur Anzeige zusätzlicher Informationen des "Zahnarztes" / Кнопка для відображення додаткової інформації дантиста | Button for drawing additional information Dentist
     showMore() {
         const moreInfo = [];
 
@@ -131,7 +131,7 @@ export class VisitDentist extends Visit {
         this.elem.hideBtn.style.display = 'inline-block';
     }
 
-//Кнопка для приховання інформації дантиста / Button to hide Dentist information
+//Schaltfläche zum Ausblenden von Zahnarztinformationen / Кнопка для приховання інформації дантиста / Button to hide Dentist information
     hide() {
         this.elem.self.removeChild(this.elem.purpose);
         this.elem.self.removeChild(this.elem.desc);
@@ -143,14 +143,14 @@ export class VisitDentist extends Visit {
     }
 }
 
-//Дочірній клас Терапевт / Child class Therapist
+//Klassentherapeutin für Kinder / Дочірній клас Терапевт / Child class Therapist
 export class VisitTherapist extends Visit {
     constructor(visit) {
         super(visit);
         this.age = visit.content.age;
     }
 
-//Відмалювання Терапевта на головній сторінці / Drawing Therapist on the main page
+//Zeichnung des "Therapeuten" auf der Hauptseite / Відмалювання Терапевта на головній сторінці / Drawing Therapist on the main page
     render(parent) {
         super.render(parent);
         this.elem.age = document.createElement("span");
@@ -173,7 +173,7 @@ export class VisitTherapist extends Visit {
         }
     }
 
-//Кнопка для відображення додаткової інформації дантиста / Button for drawing additional information Dentist
+//Schaltfläche zur Anzeige zusätzlicher Informationen "des Zahnarztes" / Кнопка для відображення додаткової інформації дантиста / Button for drawing additional information Dentist
     showMore() {
         const moreInfo = [];
 
@@ -191,7 +191,7 @@ export class VisitTherapist extends Visit {
         this.elem.hideBtn.style.display = 'inline-block';
     }
 
-//Кнопка для приховання інформації Терапевта / Button to hide Therapist information
+//Schaltfläche zum Ausblenden von Therapeuteninformationen / Кнопка для приховання інформації Терапевта / Button to hide Therapist information
     hide() {
         this.elem.self.removeChild(this.elem.purpose);
         this.elem.self.removeChild(this.elem.desc);
@@ -202,7 +202,7 @@ export class VisitTherapist extends Visit {
     }
 }
 
-//Дочірній клас Кардіолога / Child class of Cardiologist
+//Kinderklasse des Kardiologen / Дочірній клас Кардіолога / Child class of Cardiologist
 export class VisitCardiologist extends Visit {
     constructor(visit) {
         super(visit);
@@ -212,7 +212,7 @@ export class VisitCardiologist extends Visit {
         this.age = visit.content.age;
     }
 
-//Відмальовка кардіолога на головній сторінці / Drawing of the Cardiologist on the main page
+//Eine Zeichnung eines Kardiologen auf der Hauptseite / Відмальовка кардіолога на головній сторінці / Drawing of the Cardiologist on the main page
     render(parent) {
         super.render(parent);
         this.elem.pressure = document.createElement("span");
@@ -244,7 +244,7 @@ export class VisitCardiologist extends Visit {
         }
     }
 
-//Кнопка для отрисовки дополнительной информации Кардиолога  / Button for drawing additional information of the Cardiologist
+//Schaltfläche zum Abrufen zusätzlicher Informationen des Kardiologen / Кнопка для відображення додаткової інформації Кардіолога  / Button for drawing additional information of the Cardiologist
     showMore() {
         const moreInfo = [];
 
@@ -262,7 +262,7 @@ export class VisitCardiologist extends Visit {
         this.elem.hideBtn.style.display = 'inline-block';
     }
 
-//Кнопка для приховання інформації кардіолога / Button to hide information Cardiologist
+//Schaltfläche zum Ausblenden von Kardiologeninformationen / Кнопка для приховання інформації кардіолога / Button to hide information Cardiologist
     hide() {
         this.elem.self.removeChild(this.elem.purpose);
         this.elem.self.removeChild(this.elem.desc);

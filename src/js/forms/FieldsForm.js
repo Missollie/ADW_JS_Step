@@ -1,4 +1,4 @@
-// Створюємо об'єкт полів форми з placeholders / Сreate a form field object with placeholders
+// Wir erstellen ein Objekt aus Formularfeldern mit Platzhaltern / Створюємо об'єкт полів форми з placeholders / Сreate a form field object with placeholders
 export const fieldsForm = {
     fullName: {
        type: "text",

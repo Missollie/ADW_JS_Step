@@ -1,4 +1,4 @@
-// Створюємо базову модальну форму / Creating a basic modal form
+// Wir erstellen ein modales Basisformular / Створюємо базову модальну форму / Creating a basic modal form
 export default class Modal {
     constructor() {
         this.element = {
@@ -9,7 +9,7 @@ export default class Modal {
         };
     }
 
-// Відмалювання модальної форми в header / Draw a modal form in the header
+// Abgrenzung der Modalform in header / Відмалювання модальної форми в header / Draw a modal form in the header
     render() {
         const parent = document.querySelector('.header');
         const modalWrapper = this.element.modalWrapper;
@@ -24,8 +24,9 @@ export default class Modal {
         this.element.modalWindow.append(btnClose, this.element.btnSubmit);
         modalWrapper.append(this.element.modalWindow);
         parent.append(modalWrapper);
-
-// Обробка за межами модального вікна або на btnClose , видалити модальну форму 
+//
+// Verarbeitung außerhalb eines modalen Fensters oder auf einer Schaltfläche btnClose,Löschung des Modalformulars
+//Обробка за межами модального вікна або на btnClose , видалення модальної форми 
 // A handler outside the modal window or on btn Close , removes the modal form
         document.addEventListener('click', (event) => {
             if (event.target === modalWrapper || event.target === btnClose) {

@@ -10,12 +10,16 @@ import Modal from './Modal.js';
 import { getLogin } from './ajax.js';
 import { renderCards } from '../cards/cards.js';
 
+
+//Wir erstellen einen Container zum Platzieren von Karten im DOM
 // Створюємо контейнер для розміщення карток в DOM / Create a container for placing cards in the DOM
 const container = document.getElementById('container');
 export let token = sessionStorage.getItem('token');
 const btnLog = document.querySelector('.header__btn');
 btnLog.addEventListener('click', createModal);
 
+
+//Sichtbarkeitsfunktion des LOGIN-Buttons, bei Erhalt des Tokens wird der Button ausgeblendet
 // Функція видимості кнопки LOGIN, якщо отриманий токен, кнопка приховується | Visibility function of the LOGIN button, if a token is received, the button is hidden
 window.onload = function () {
   if (token) {
@@ -26,6 +30,7 @@ window.onload = function () {
   }
 };
 
+//Modale Fensterklasse für die Autorisierung
 // Клас модального вікна для авторизації / Modal window class for authorization
 class ModalLogIN extends Modal {
   constructor(email, password) {
@@ -37,6 +42,7 @@ class ModalLogIN extends Modal {
     this.element.password = document.createElement('input');
   }
 
+  //Wir zeichnen ein modales Fenster im DOM
   // Відмальовуємо модальне вікно в DOM / Draw a modal window in the DOM
   render() {
     super.render();
@@ -50,6 +56,8 @@ class ModalLogIN extends Modal {
     this.element.title.className = 'header__modal-text';
     this.element.modalWindow.append(this.element.btnClose, this.element.title, this.element.email, this.element.password, this.element.btnSubmit);
 
+
+//Ereignishandler für die Autorisierungsschaltfläche, der die Übereinstimmung mit dem geflashten Token überprüft
 // Обробник події на кнопку авторизації, перевірка на відповідність прошитому токену 
 //The handler for the authorization button, checking for compliance with the flashed token
 this.element.btnSubmit.addEventListener('click',  async () => {
@@ -65,8 +73,10 @@ this.element.btnSubmit.addEventListener('click',  async () => {
     btnLog.remove();
     document.querySelector('.header__btn-create').removeAttribute('hidden');
 
-    // карточки, отримані з серверу, відмальовуємо на сторінку |
-    // cards received from the server are drawn onto the page
+
+//Karten, die vom Server empfangen werden, werden auf die Seite gezeichnet
+ // карточки, отримані з серверу, відмальовуємо на сторінку 
+ // cards received from the server are drawn onto the page
     renderCards(container, token);
   } catch {
     alert('Incorrect login/password! Try again and type right date.');
@@ -75,6 +85,8 @@ this.element.btnSubmit.addEventListener('click',  async () => {
 }
 }
 
+
+//Die Funktion zum Erstellen einer Instanz und zum Starten des Neuzeichnens des Autorisierungsfensters
 // Ф-ція створення інстансу і запуску відмалювання вікна авторизації 
 //The function of creating an instance and launching the rendering of the authorization window
 function createModal() {

@@ -49,7 +49,9 @@ export function search(formContainer, visitContainer) {
 
    function getAndRender() {
       visitContainer.innerText = "";
-      const visits = getVisits(); // отримати дані з сервера та перетворити їх на масив готових для рендеру об'єктів
+      const visits = getVisits(); 
+      //Holen Sie sich Daten vom Server und verwandeln Sie sie in ein Array von Objekten, die zum Rendern bereit sind
+      // отримати дані з сервера та перетворити їх на масив готових для рендеру об'єктів
       //get data from the server and convert it into an array of renderable objects
       visits.then(cards => {
          let cardsSearch = cards.filter(visit => {
@@ -71,11 +73,15 @@ export function search(formContainer, visitContainer) {
    })
 }
 
+
+//wir erhalten Daten mit bestehenden Besuchen vom Server
 // отримуємо дані з існуючими візитами із сервера /get data with existing visits from the server
 export function getVisits() {
    return getCards().then(c => c.json())
       .then(visits => {
          if (visits !== undefined) {
+
+//Platzieren Sie Visitenkarten in der gewünschten Anordnung          
 // поміщаємо картки візитів у потрібний масив / put the visit cards in the required array
             return visits.map(visit => {
                if (visit.content.doctor === "Dentist") {

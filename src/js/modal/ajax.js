@@ -1,11 +1,13 @@
 
-//3dfb076c-2ac8-4619-96f7-d8bc6f59b84b
-//------------------------------------
+// Datei mit Abrufanforderungen für die Autorisierung getLogin, Karten erstellen createCard
 // Файл з fetch-запитами для авторизації getLogin, створення карток createCard, 
 // File with fetch requests for getLogin authorization, createCard creation,
-//удаления карт deleteCard, редактирования карт editCard, / delete cards delete Card, edit cards editCard,
-//получения масссива карт getCards / getting an array of cards getCards
-//-----------------------------------
+//------------------------------------------------------
+// Karten löschen deleteCard, Kartenbearbeitung editCard
+//видалення карт deleteCard, редагування карт editCard
+// delete cards delete Card, edit cards editCard
+//eine Reihe von Karten zu erhalten getCards / отримання масиву карт getCards / getting an array of cards getCards
+//-------------------------------------------------------------
 //Authorization: Bearer ${3dfb076c-2ac8-4619-96f7-d8bc6f59b84b}
 import {token} from "./ModalLogIN.js";
 
