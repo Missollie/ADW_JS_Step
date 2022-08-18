@@ -1,0 +1,30 @@
+.form {
+    &__input {
+       @include form-input;
+       border: none;
+       background: transparent;
+       border-bottom: 2px solid $color-black;
+    }
+ 
+    &__submit {
+       @include form-input;
+       font-weight: bold;
+       background: $color-blue;
+       color: $color-darkblue;
+       border-radius: 10px;
+       border: 2px solid $color-blue;
+       cursor: pointer;
+    }
+ 
+    &__select {
+       @include form-select;
+       text-align: center;
+       margin-top: 5px;
+       margin-bottom: 5px;
+       padding: 3px 15px;
+    }
+ }
+ 
+ ::placeholder {
+    color: #5f4d4d;
+ }
