@@ -1,0 +1,14 @@
+.header {
+    @include flex-space-between;
+    padding: 15px;
+ 
+    &__link {
+       display: flex;
+       text-decoration: none;
+    }
+ 
+    &__logo {
+       width: 150px;
+       height: 150px;
+    }
+}
